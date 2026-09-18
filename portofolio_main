@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NAJAF — Creative Portfolio</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap');
+
+:root{
+  --bg:#050505;
+  --text:#f3f1ea;
+  --muted:#77766f;
+  --gold:#c7a85b;
+  --line:rgba(199,168,91,.24);
+  --soft:rgba(255,255,255,.055);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,Arial,sans-serif;
+  overflow-x:hidden;
+}
+body:before{
+  content:"";
+  position:fixed;inset:0;pointer-events:none;z-index:20;
+  opacity:.11;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+}
+a{color:inherit;text-decoration:none}
+section{position:relative}
+.container{width:min(1180px,88vw);margin:auto}
+.mono{font-family:"Space Mono",monospace}
+.eyebrow{
+  font:10px "Space Mono",monospace;
+  letter-spacing:4px;
+  color:#8e8d87;
+  text-transform:uppercase;
+}
+
+/* loader */
+.loader{
+  position:fixed;inset:0;background:#020202;z-index:100;
+  display:grid;place-items:center;
+  transition:opacity .9s,visibility .9s;
+}
+.loader.hide{opacity:0;visibility:hidden}
+.loader-box{text-align:center;width:min(500px,80vw)}
+.loader-title{
+  font-size:clamp(48px,9vw,110px);font-weight:600;letter-spacing:-7px;
+}
+.loader-title span{color:transparent;-webkit-text-stroke:1px var(--gold)}
+.loader-line{height:1px;background:#272727;margin-top:25px;overflow:hidden}
+.loader-line i{display:block;height:100%;width:0;background:var(--gold);animation:load 1.8s ease forwards}
+@keyframes load{to{width:100%}}
+
+/* navigation */
+nav{
+  position:fixed;top:0;left:0;width:100%;z-index:50;
+  padding:28px 5.5vw;display:flex;justify-content:space-between;align-items:center;
+  mix-blend-mode:screen;
+}
+.logo{font-size:12px;font-weight:700;letter-spacing:3px}
+.logo b{color:var(--gold)}
+.nav-links{display:flex;gap:29px}
+.nav-links a{
+  font:8px "Space Mono",monospace;letter-spacing:1.7px;
+  color:#aaa;position:relative;
+}
+.nav-links a:after{
+  content:"";position:absolute;left:0;bottom:-8px;width:0;height:1px;
+  background:var(--gold);transition:.3s;
+}
+.nav-links a:hover:after{width:100%}
+.menu{display:none}
+
+/* background effects */
+.grid{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),
+                   linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:90px 90px;
+  opacity:.13;
+  mask-image:linear-gradient(to bottom,transparent,black 15%,black 75%,transparent);
+}
+.orb{
+  position:absolute;width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(199,168,91,.13),transparent 65%);
+  filter:blur(8px);pointer-events:none;
+}
+
+/* hero */
+.hero{min-height:100vh;display:flex;align-items:center;overflow:hidden}
+.hero .grid{opacity:.1}
+.hero .orb{right:-180px;top:15%}
+.hero-inner{width:min(1100px,86vw);margin:auto;position:relative;padding-top:60px}
+.hero-title{
+  font-size:clamp(70px,12.5vw,170px);
+  line-height:.78;letter-spacing:-10px;font-weight:600;
+  text-transform:uppercase;
+}
+.hero-title .outline{
+  color:transparent;-webkit-text-stroke:1px rgba(199,168,91,.75);
+}
+.hero-meta{display:flex;justify-content:space-between;align-items:end;margin-top:70px}
+.meta-left{font-size:8px;color:#777;letter-spacing:2px}
+.meta-left span{color:var(--gold)}
+.meta-right{font:9px "Space Mono",monospace;color:#777}
+.scroll{
+  position:absolute;right:0;bottom:-90px;
+  writing-mode:vertical-rl;font:8px "Space Mono";letter-spacing:3px;color:#777
+}
+.scroll:before{content:"";display:inline-block;height:55px;width:1px;background:var(--gold);margin-bottom:12px}
+
+/* about */
+.about{padding:170px 0 130px}
+.about-layout{display:grid;grid-template-columns:1fr 1fr;gap:100px}
+.about h2{
+  font-size:clamp(42px,6vw,78px);line-height:.95;letter-spacing:-4px;
+  max-width:600px;
+}
+.about h2 em{font-style:normal;color:transparent;-webkit-text-stroke:1px var(--gold)}
+.about-copy{padding-top:15px;color:#8d8c86;font-size:13px;line-height:2;max-width:430px}
+.signature{margin-top:45px;font:12px "Space Mono";color:#c0bea9}
+
+/* services */
+.services{padding:100px 0 160px}
+.section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:40px}
+.section-head h2{font-size:13px;letter-spacing:4px;font-weight:500}
+.section-head span{font:9px "Space Mono";color:#666}
+.cards{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-left:1px solid var(--line);
+}
+.card{
+  min-height:315px;padding:27px 20px;border-right:1px solid var(--line);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  position:relative;transition:.5s;overflow:hidden;
+}
+.card:before{
+  content:"";position:absolute;inset:auto 0 0;height:0;background:linear-gradient(transparent,rgba(199,168,91,.08));
+  transition:.5s;
+}
+.card:hover{transform:translateY(-8px);border-color:rgba(199,168,91,.5)}
+.card:hover:before{height:100%}
+.num{font:9px "Space Mono";color:#777}
+.icon{
+  width:48px;height:48px;border:1px solid rgba(199,168,91,.65);border-radius:50%;
+  display:grid;place-items:center;margin:27px 0 34px;
+  color:var(--gold);position:relative;z-index:1;
+}
+.icon:after{content:"";width:7px;height:7px;border:1px solid currentColor;transform:rotate(45deg)}
+.card h3{font-size:16px;font-weight:400;position:relative;z-index:1}
+.card p{font-size:9px;line-height:1.8;color:#777;margin-top:14px;max-width:190px;position:relative;z-index:1}
+.card .arrow{position:absolute;right:20px;bottom:23px;color:var(--gold)}
+
+/* work */
+.work{padding:130px 0}
+.work-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:18px}
+.project{
+  min-height:380px;border:1px solid var(--line);position:relative;overflow:hidden;
+  background:linear-gradient(135deg,#080808,#11100c);
+}
+.project:nth-child(2){min-height:250px}
+.project:nth-child(3){min-height:250px}
+.project:nth-child(4){grid-column:2;min-height:380px}
+.project-bg{
+  position:absolute;inset:0;
+  background:radial-gradient(circle at 65% 45%,rgba(199,168,91,.16),transparent 25%),
+             linear-gradient(125deg,transparent 45%,rgba(255,255,255,.025) 46%,transparent 47%);
+}
+.project-content{position:absolute;inset:0;padding:30px;display:flex;flex-direction:column;justify-content:space-between}
+.project small{font:8px "Space Mono";color:#777}
+.project h3{font-size:34px;letter-spacing:-2px;font-weight:400}
+.project h3 span{color:transparent;-webkit-text-stroke:1px var(--gold)}
+.project a{font:9px "Space Mono";color:var(--gold)}
+
+/* stack */
+.stack{padding:110px 0;border-top:1px solid rgba(255,255,255,.06)}
+.stack-list{display:grid;grid-template-columns:repeat(5,1fr);border-left:1px solid var(--line);margin-top:50px}
+.tech{padding:25px;border-right:1px solid var(--line);min-height:130px}
+.tech b{font:11px "Space Mono";font-weight:400;color:#ddd}
+.tech span{display:block;color:#555;font-size:9px;margin-top:18px}
+
+/* contact */
+.contact{padding:150px 0 90px;overflow:hidden}
+.contact .orb{left:-300px;top:0}
+.contact-title{
+  font-size:clamp(55px,10vw,130px);line-height:.8;letter-spacing:-8px;
+}
+.contact-title span{color:transparent;-webkit-text-stroke:1px var(--gold)}
+.contact-bottom{
+  display:flex;justify-content:space-between;align-items:end;margin-top:90px;
+  border-top:1px solid var(--line);padding-top:30px
+}
+.email{font-size:14px}
+.links{display:flex;gap:28px;font:8px "Space Mono";color:#777}
+footer{padding:25px 5.5vw;border-top:1px solid rgba(255,255,255,.05);display:flex;justify-content:space-between;color:#555;font:8px "Space Mono"}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(35px);transition:1s ease}
+.reveal.show{opacity:1;transform:none}
+
+/* cursor */
+.cursor{
+  position:fixed;width:12px;height:12px;border:1px solid var(--gold);border-radius:50%;
+  pointer-events:none;z-index:90;transform:translate(-50%,-50%);
+  transition:width .2s,height .2s,background .2s;
+}
+.cursor-dot{position:fixed;width:3px;height:3px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:91;transform:translate(-50%,-50%)}
+
+/* responsive */
+@media(max-width:800px){
+  nav{padding:20px 6vw}
+  .nav-links{display:none}
+  .menu{display:block;font:9px "Space Mono";color:#aaa}
+  .hero-inner{padding-top:0}
+  .hero-title{letter-spacing:-5px}
+  .hero-meta{margin-top:45px}
+  .about-layout{grid-template-columns:1fr;gap:40px}
+  .about{padding:100px 0}
+  .cards{grid-template-columns:1fr 1fr}
+  .card{min-height:280px}
+  .work-grid{grid-template-columns:1fr}
+  .project,.project:nth-child(2),.project:nth-child(3),.project:nth-child(4){grid-column:auto;min-height:300px}
+  .stack-list{grid-template-columns:1fr 1fr}
+  .contact-bottom{display:block}
+  .links{margin-top:30px}
+  .cursor,.cursor-dot{display:none}
+}
+@media(max-width:500px){
+  .cards{grid-template-columns:1fr}
+  .stack-list{grid-template-columns:1fr}
+  .hero-title{font-size:19vw}
+  .contact-title{font-size:18vw}
+}
+</style>
+</head>
+<body>
+
+<div class="loader" id="loader">
+  <div class="loader-box">
+    <div class="eyebrow">PORTFOLIO / SYSTEM INITIALIZING</div>
+    <div class="loader-title">NAJAF <span>CREATIVE</span></div>
+    <div class="loader-line"><i></i></div>
+  </div>
+</div>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<nav>
+  <a class="logo" href="#home">◆ NAJAF <b>CREATIVE</b></a>
+  <div class="nav-links">
+    <a href="#home">HOME</a>
+    <a href="#about">ABOUT</a>
+    <a href="#services">SERVICES</a>
+    <a href="#stack">TECH STACK</a>
+    <a href="#work">PROJECTS</a>
+    <a href="#contact">CONTACT</a>
+  </div>
+  <span class="menu">MENU / +</span>
+</nav>
+
+<main>
+<section class="hero" id="home">
+  <div class="grid"></div><div class="orb"></div>
+  <div class="hero-inner reveal">
+    <div class="eyebrow">PORTFOLIO / 01 / SYSTEM INITIALIZING</div>
+    <h1 class="hero-title">NAJAF<br><span class="outline">CREATIVE</span></h1>
+    <div class="hero-meta">
+      <div class="meta-left">FRONTEND DEVELOPER <span>●</span> DIGITAL DESIGNER</div>
+      <div class="meta-right">EST. 2024</div>
+    </div>
+    <div class="scroll">SCROLL TO EXPLORE</div>
+  </div>
+</section>
+
+<section class="about" id="about">
+ <div class="container">
+  <div class="section-head reveal"><h2>01 — ABOUT</h2><span>WHO I AM</span></div>
+  <div class="about-layout">
+   <div class="reveal">
+    <h2>BUILDING <em>DIGITAL</em><br>EXPERIENCES<br>THAT MATTER.</h2>
+   </div>
+   <div class="about-copy reveal">
+    I create modern interfaces where clean structure meets experimental visual design.
+    My work focuses on frontend development, motion, typography and immersive digital experiences.
+    <div class="signature">NAJAF / CREATIVE DEVELOPER</div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="services" id="services">
+ <div class="container">
+  <div class="section-head reveal"><h2>02 — SERVICES</h2><span>WHAT I DO</span></div>
+  <div class="cards">
+   <article class="card reveal"><span class="num">01</span><div class="icon"></div><h3>INTERFACE<br>DESIGN</h3><p>Editorial layouts, futuristic interfaces and premium visual systems designed around strong typography.</p><span class="arrow">↗</span></article>
+   <article class="card reveal"><span class="num">02</span><div class="icon"></div><h3>MOTION<br>EXPERIENCE</h3><p>Scroll animations, transitions, parallax effects and interactive movement powered by GSAP.</p><span class="arrow">↗</span></article>
+   <article class="card reveal"><span class="num">03</span><div class="icon"></div><h3>FRONTEND<br>DEVELOPMENT</h3><p>Responsive and functional websites built with modern frontend technologies and clean code.</p><span class="arrow">↗</span></article>
+   <article class="card reveal"><span class="num">04</span><div class="icon"></div><h3>FUTURE<br>WEB</h3><p>AI-inspired visuals, spatial UI, generative backgrounds and experimental digital concepts.</p><span class="arrow">↗</span></article>
+  </div>
+ </div>
+</section>
+
+<section class="work" id="work">
+ <div class="container">
+  <div class="section-head reveal"><h2>03 — SELECTED PROJECTS</h2><span>RECENT WORK</span></div>
+  <div class="work-grid">
+   <article class="project reveal"><div class="project-bg"></div><div class="project-content"><small>PROJECT / 001 — 2026</small><h3>NEON<br><span>ARCHIVE</span></h3><a href="#">VIEW CASE STUDY ↗</a></div></article>
+   <article class="project reveal"><div class="project-bg"></div><div class="project-content"><small>PROJECT / 002</small><h3>VOID<br><span>STUDIO</span></h3><a href="#">EXPLORE ↗</a></div></article>
+   <article class="project reveal"><div class="project-bg"></div><div class="project-content"><small>PROJECT / 003</small><h3>AI<br><span>VISION</span></h3><a href="#">EXPLORE ↗</a></div></article>
+   <article class="project reveal"><div class="project-bg"></div><div class="project-content"><small>PROJECT / 004</small><h3>FUTURE<br><span>WEB</span></h3><a href="#">VIEW PROJECT ↗</a></div></article>
+  </div>
+ </div>
+</section>
+
+<section class="stack" id="stack">
+ <div class="container">
+  <div class="section-head reveal"><h2>04 — TECH STACK</h2><span>TOOLS & TECHNOLOGIES</span></div>
+  <div class="stack-list">
+   <div class="tech reveal"><b>HTML / CSS</b><span>STRUCTURE + VISUAL SYSTEMS</span></div>
+   <div class="tech reveal"><b>JAVASCRIPT</b><span>INTERACTION + LOGIC</span></div>
+   <div class="tech reveal"><b>GSAP</b><span>MOTION + ANIMATION</span></div>
+   <div class="tech reveal"><b>FIGMA</b><span>UI / UX DESIGN</span></div>
+   <div class="tech reveal"><b>WEBGL</b><span>EXPERIMENTAL 3D</span></div>
+  </div>
+ </div>
+</section>
+
+<section class="contact" id="contact">
+ <div class="orb"></div>
+ <div class="container">
+  <div class="section-head reveal"><h2>05 — CONTACT</h2><span>LET'S CREATE</span></div>
+  <div class="contact-title reveal">HELLO<br><span>PORTOFOLIO.COM</span></div>
+  <div class="contact-bottom reveal">
+   <div class="email">najof54@gmail.com</div>
+   <div class="links">
+    <a href="https://github.com/najaf-ali12-design/portfolia">GITHUB ↗</a><a href="https://www.instagram.com/itx__najaf?stkn=MTl3N3BtZXk0Y2RqMg==">INSTAGRAM ↗</a>
+   </div>
+  </div>
+ </div>
+</section>
+</main>
+
+<footer>
+  <span>© 2026 NAJAF CREATIVE</span>
+  <span>DESIGNED + DEVELOPED WITH INTENT</span>
+</footer>
+
+<script>
+window.addEventListener("load",()=>{
+  setTimeout(()=>document.getElementById("loader").classList.add("hide"),1800);
+});
+
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting) entry.target.classList.add("show");
+  });
+},{threshold:.12});
+document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+
+const cursor=document.getElementById("cursor");
+const dot=document.getElementById("cursorDot");
+let mx=innerWidth/2,my=innerHeight/2,cx=mx,cy=my;
+window.addEventListener("mousemove",e=>{mx=e.clientX;my=e.clientY});
+function animateCursor(){
+  cx += (mx-cx)*.16; cy += (my-cy)*.16;
+  cursor.style.left=cx+"px";cursor.style.top=cy+"px";
+  dot.style.left=mx+"px";dot.style.top=my+"px";
+  requestAnimationFrame(animateCursor);
+}
+animateCursor();
+
+document.querySelectorAll("a,.card,.project").forEach(el=>{
+  el.addEventListener("mouseenter",()=>{cursor.style.width="30px";cursor.style.height="30px";cursor.style.background="rgba(199,168,91,.08)"});
+  el.addEventListener("mouseleave",()=>{cursor.style.width="12px";cursor.style.height="12px";cursor.style.background="transparent"});
+});
+
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener("click",e=>{
+    const target=document.querySelector(a.getAttribute("href"));
+    if(target){e.preventDefault();target.scrollIntoView({behavior:"smooth"})}
+  });
+});
+</script>
+</body>
+</html>
